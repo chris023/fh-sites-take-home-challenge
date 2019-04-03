@@ -1,7 +1,10 @@
  *Completed 4/3/19 for FareHarbor
-  Notes: 
-    -Only one test per hand type
-    -Assumes all given hands are valid and correctly formatted
+ 
+ Notes: 
+  
+    -Only one test per type of hand
+    
+    -Assumes all hands given to the constructor are valid and correctly formatted
 
 <h2>JS Take Home Challenge</h2>
 
