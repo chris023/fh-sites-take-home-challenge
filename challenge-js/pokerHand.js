@@ -1,6 +1,6 @@
 class PokerHand {
   constructor(handAsString) {
-    //Ignoring key naming conventions here for simplicity
+    // Ignoring key naming conventions here for simplicity
     this.possibleHands = {
       Royal_Flush: { has: null },
       Straight_Flush: { has: null },
@@ -14,13 +14,12 @@ class PokerHand {
       High_Card: { has: true },
     }
     this.duplicateCount = {}
-    this.orderOfCards =
-      ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-    
+    this.orderOfCards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+
     this.hand = this.parseHand(handAsString)
     this.countDuplicates()
-    
-    //Other hands types not here are checked implicitly
+
+    // Other hands types not here are checked implicitly
     this.checkRoyalFlush()
     this.checkStraight()
     this.checkStraightFlush()
@@ -32,9 +31,9 @@ class PokerHand {
   }
 
   // Parses the input string into a useful sorted DataSet.
-  // 
+  //
   // Example:
-  //   'As Ks Qs Js 10s' => 
+  //   'As Ks Qs Js 10s' =>
   //  [
   //    { suit: 's', value: 'A' },
   //    { suit: 's', value: 'K' },
@@ -51,18 +50,19 @@ class PokerHand {
       return { suit, value }
     })
 
-    return hand.sort((a, b) => this.orderOfCards.indexOf(a.value) > this.orderOfCards.indexOf(b.value))
+    return hand.sort(
+      (a, b) => this.orderOfCards.indexOf(a.value) > this.orderOfCards.indexOf(b.value))
   }
 
   countDuplicates() {
-    //Remove duplicate values from array of card values
+    // Remove duplicate values from array of card values
     const handValues = this.hand.map(card => card.value)
     const withoutDuplicateValues = [...new Set(handValues)]
 
-    //Only necessary to continue if values were removed, signaling duplicates
+    // Only necessary to continue if values were removed, signaling duplicates
     if (withoutDuplicateValues === 5) return
-    
-    //Count occurrance of each card and store value in count
+
+    // Count occurrance of each card and store value in count
     handValues.forEach((value) => {
       this.duplicateCount[value] = this.duplicateCount[value] ? this.duplicateCount[value] + 1 : 1
     })
@@ -115,7 +115,7 @@ class PokerHand {
     this.possibleHands.Three_of_a_Kind.has = false
     return false
   }
-  
+
   checkFourOfAKind() {
     if (Object.values(this.duplicateCount).includes(4)) {
       this.possibleHands.Four_of_a_Kind.has = true
@@ -132,8 +132,7 @@ class PokerHand {
       const currentCardIndex = this.orderOfCards.indexOf(card.value)
       const nextCardIndex = this.orderOfCards.indexOf(hand[i + 1].value)
 
-      if (nextCardIndex - currentCardIndex !== 1)
-        return false
+      if (nextCardIndex - currentCardIndex !== 1) return false
 
       return isStraight
     }, true)
@@ -175,8 +174,7 @@ class PokerHand {
 
   getRank() {
     const bestHand = Object.keys(this.possibleHands).filter(
-      (key) => this.possibleHands[key].has
-    )[0]
+      key => this.possibleHands[key].has)[0]
     return bestHand.split('_').join(' ')
   }
 }
