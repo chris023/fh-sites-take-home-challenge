@@ -1,3 +1,8 @@
+ *Completed 4/3/19 for FareHarbor
+  Notes: 
+    -Only one test per hand type
+    -Assumes all given hands are valid and correctly formatted
+
 <h2>JS Take Home Challenge</h2>
 
 #### Make sure you are in the `/challenge-js` directory.
